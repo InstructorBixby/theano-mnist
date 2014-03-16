@@ -1,0 +1,17 @@
+http://deeplearning.net/tutorial/
+
+theano is backwards. you dont write the maths, you build a THING that
+describes the maths and then theano.function compiles it into c and gives
+you back something you can call.
+
+    x = T.matrix('x')
+    y = x * 2
+    f = theano.function([x], y)
+
+x has no value in it. y is not a number. f is the actual function.
+
+the point of all that is T.grad(cost, W). it works out the derivative of
+the whole thing for you. i dont have to do any calculus. which is great
+and also means i have no idea what it is doing.
+
+first time you run it, it sits there for 30 seconds. its running gcc.
