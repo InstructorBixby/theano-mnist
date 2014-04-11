@@ -34,9 +34,15 @@ gb = T.grad(cost, b)
 train = theano.function([x, y], cost, updates=[(W, W - LR*gW), (b, b - LR*gb)])
 err = theano.function([x, y], T.mean(T.neq(pred, y)))
 
+B = 600
+nb = trX.shape[0] / B
+
 e = 0
 while e < 50:
-    c = train(trX, trY)
+    i = 0
+    while i < nb:
+        c = train(trX[i*B:i*B+B], trY[i*B:i*B+B])
+        i = i + 1
     print e, c, err(teX, teY)
     e = e + 1
 print "DONE"
