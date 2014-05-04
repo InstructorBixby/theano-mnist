@@ -1,0 +1,11 @@
+the mlp is WORSE than the logistic regression. 11% vs 7.4%. it has 500
+extra hidden units, that makes no sense.
+
+things i tried
+- 200 epochs instead of 100 (no)
+- LR 0.5 (nan)
+- LR 0.01 (same 11% just slower)
+- 1000 hidden units (same)
+- relu instead of tanh (couldnt get it to work at all)
+
+none of it changes anything which means its not a settings problem.
