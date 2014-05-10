@@ -8,7 +8,7 @@ import theano.tensor as T
 
 LR = 0.1
 B = 20
-NH = 500
+NH = 1000
 
 r = numpy.random.RandomState(1234)
 
