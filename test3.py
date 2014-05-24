@@ -17,13 +17,18 @@ d = cPickle.load(f)
 f.close()
 trX = d[0][0]
 trY = d[0][1].astype('int32')
-teX = d[1][0]
-teY = d[1][1].astype('int32')
+# d[1] is the VALID set not the test set. test2.py has this wrong
+teX = d[2][0]
+teY = d[2][1].astype('int32')
 
-W1 = theano.shared(numpy.asarray(r.uniform(-0.01, 0.01, (784, NH)),
+# the range has to depend on how big the layer is. with 0.01 for both
+# layers nothing moved. r1 here is about 0.068 so i was 7x too small
+r1 = numpy.sqrt(6.0 / (784 + NH))
+r2 = numpy.sqrt(6.0 / (NH + 10))
+W1 = theano.shared(numpy.asarray(r.uniform(-r1, r1, (784, NH)),
                                  dtype=theano.config.floatX))
 b1 = theano.shared(numpy.zeros((NH,), dtype=theano.config.floatX))
-W2 = theano.shared(numpy.asarray(r.uniform(-0.01, 0.01, (NH, 10)),
+W2 = theano.shared(numpy.asarray(r.uniform(-r2, r2, (NH, 10)),
                                  dtype=theano.config.floatX))
 b2 = theano.shared(numpy.zeros((10,), dtype=theano.config.floatX))
 

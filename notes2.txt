@@ -9,3 +9,25 @@ things i tried
 - relu instead of tanh (couldnt get it to work at all)
 
 none of it changes anything which means its not a settings problem.
+
+---
+
+IT WAS THE WEIGHT INIT. one line.
+
+i had uniform(-0.01, 0.01) for both layers because thats what i typed. the
+tutorial does sqrt(6/(in+out)) which for the first layer is 0.068, so my
+numbers were about 7 times too small.
+
+with weights that small everything going into tanh is near zero, and tanh
+near zero is basically a straight line, so my hidden layer was doing
+nothing that a plain linear model couldnt already do. thats why 500 units
+bought me nothing.
+
+1.94% now.
+
+---
+
+also while i was in there i noticed d[1] is the VALIDATION set, not the
+test set. thats d[2]. so every number test2.py ever printed was on the
+valid set. the logistic regression number is probably still about right
+but its not the number i said it was.
