@@ -9,6 +9,7 @@ import theano.tensor as T
 LR = 0.1
 B = 20
 NH = 500
+L2 = 0.0001
 
 r = numpy.random.RandomState(1234)
 
@@ -38,7 +39,9 @@ y = T.ivector('y')
 h = T.tanh(T.dot(x, W1) + b1)
 p = T.nnet.softmax(T.dot(h, W2) + b2)
 pred = T.argmax(p, axis=1)
-cost = -T.mean(T.log(p)[T.arange(y.shape[0]), y])
+nll = -T.mean(T.log(p)[T.arange(y.shape[0]), y])
+# the test error was creeping back up after epoch 60
+cost = nll + L2*((W1**2).sum() + (W2**2).sum())
 
 ps = [W1, b1, W2, b2]
 gs = T.grad(cost, ps)
