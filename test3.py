@@ -10,6 +10,7 @@ LR = 0.1
 B = 20
 NH = 500
 L2 = 0.0001
+MOM = 0.9
 
 r = numpy.random.RandomState(1234)
 
@@ -48,7 +49,9 @@ gs = T.grad(cost, ps)
 up = []
 i = 0
 while i < len(ps):
-    up.append((ps[i], ps[i] - LR*gs[i]))
+    v = theano.shared(ps[i].get_value() * 0.0)
+    up.append((v, MOM*v - LR*gs[i]))
+    up.append((ps[i], ps[i] + MOM*v - LR*gs[i]))
     i = i + 1
 
 train = theano.function([x, y], cost, updates=up)
