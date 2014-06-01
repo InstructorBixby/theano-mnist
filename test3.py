@@ -1,5 +1,6 @@
 import gzip
 import cPickle
+import os
 import numpy
 import theano
 import theano.tensor as T
@@ -58,12 +59,24 @@ train = theano.function([x, y], cost, updates=up)
 err = theano.function([x, y], T.mean(T.neq(pred, y)))
 
 nb = trX.shape[0] / B
+best = 1.0
+cf = open('/home/panic/Desktop/mnist/curve.txt', 'w')
 e = 0
 while e < 100:
     i = 0
     while i < nb:
         train(trX[i*B:i*B+B], trY[i*B:i*B+B])
         i = i + 1
-    print e, err(teX, teY)
+    v = err(teX, teY)
+    print e, v
+    cf.write(str(e) + ' ' + str(v) + '\n')
+    cf.flush()
+    if v < best:
+        best = v
+        mf = open('/home/panic/Desktop/mnist/model.pkl', 'w')
+        cPickle.dump([W1.get_value(), b1.get_value(),
+                      W2.get_value(), b2.get_value()], mf)
+        mf.close()
     e = e + 1
+print best
 print "DONE"
