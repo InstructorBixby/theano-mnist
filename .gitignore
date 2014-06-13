@@ -1,0 +1,5 @@
+*.pyc
+*.pkl
+*.pkl.gz
+*.png
+curve.txt
