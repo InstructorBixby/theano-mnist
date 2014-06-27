@@ -31,3 +31,17 @@ also while i was in there i noticed d[1] is the VALIDATION set, not the
 test set. thats d[2]. so every number test2.py ever printed was on the
 valid set. the logistic regression number is probably still about right
 but its not the number i said it was.
+
+---
+
+confusion matrix on the 194 wrong ones. the big ones
+
+4 -> 9   21
+7 -> 2   14
+3 -> 5   13
+9 -> 4   12
+8 -> 3   9
+
+those are the exact pairs id get wrong if someone wrote them badly. its
+not making weird mistakes, its making MY mistakes. i opened the 4->9 ones
+with look.py and about half of them i would also have said 9.
