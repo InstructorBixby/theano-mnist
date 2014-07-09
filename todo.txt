@@ -1,0 +1,8 @@
+- conv.py needs a gpu. theano does cuda if you put device=gpu in
+  .theanorc but i dont have an nvidia card. a gtx 750 ti is $150
+- test2.py is still using d[1] which is the valid set, fix it
+- err() in conv.py only tests the first 500 images because image_shape is
+  stuck at the batch size. so the number it prints isnt the test error
+- no early stopping, the tutorial has a patience thing i skipped
+- the loading block is copy pasted into 7 files
+- read the lecun paper instead of just running the code
