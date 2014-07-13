@@ -17,4 +17,7 @@ graph.py     draws curve.txt
 
 test3_old.py is the broken one that sits on 11%, dont run it.
 
+the whole point of this repo for me was test3.py sitting on 11% for
+three weeks because of one number in the weight init. see notes2.txt
+
 needs numpy theano PIL matplotlib
